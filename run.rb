@@ -29,6 +29,10 @@ OptionParser.new do |opts|
     options[:run_tests] = true
   end
 
+  opts.on("-o", "--save-to PATH", "Specify save path") do |path|
+    options[:save_to] = path
+  end
+
   opts.on("-h", "--help", "Display this help") do
     puts opts
     exit
@@ -43,7 +47,7 @@ if options[:version]
 elsif options[:run_sample]
   puts "It works"
 elsif options[:run_script]
-  App.new("files/pages").run_script
+  App.new("files/pages", save_to: options[:save_to]).run_script
 elsif options[:run_tests]
   Test.run("test/cases")
 else

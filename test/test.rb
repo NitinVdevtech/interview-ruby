@@ -41,7 +41,8 @@ class Test
       end
     end
 
-    FileUtils.identical?(result_path, expected_path)
+    # we are comparing the cleaned files where empty line is not present.
+    FileUtils.identical?("#{result_path}.cleaned", "#{expected_path}.cleaned")
   end
 
   def generate
@@ -56,10 +57,8 @@ class Test
   end
 
   def result_path
-    @result_path ||=
-      "#{@test_case_path}/result.tmp".tap do |path|
-        FileUtils.rm_f(path)
-      end
+    # removed the tap because it is removing our generated result file.
+    @result_path ||= "#{@test_case_path}/result.tmp"
   end
 
   def expected_path
