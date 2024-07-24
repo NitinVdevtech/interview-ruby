@@ -15,7 +15,7 @@ class TableExtractor
     tables
   end
 
-  def print_tables(tables)
+  def print_tables(tables, output_file_path)
     sorted_tables = tables.sort_by { |table| table[:page].to_i }
     output = ""
 
@@ -38,9 +38,8 @@ class TableExtractor
       end
     end
 
-    output_file = @options[:save_to]
-    if output_file
-      File.open(output_file, 'a') { |file| file.write(output) }
+    if output_file_path
+      File.open(output_file_path, 'w') { |file| file.write(output) }
     else
       puts output
     end

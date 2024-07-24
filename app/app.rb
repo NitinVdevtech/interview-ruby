@@ -10,6 +10,6 @@ class App
 
   def run_script
     tables = @extractor.extract_tables(@pages_directory)
-    @extractor.print_tables(tables)
+    @extractor.print_tables(tables, @options[:save_to])
   end
 end
